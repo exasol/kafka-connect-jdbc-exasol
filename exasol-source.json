@@ -1,0 +1,12 @@
+{
+  "name": "exasol-source",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "connection.url": "jdbc:exa:exasol-db:8888;schema=country_schema;user=sys;password=exasol",
+    "mode": "timestamp+incrementing",
+    "timestamp.column.name": "UPDATED_AT",
+    "incrementing.column.name": "ID",
+    "topic.prefix": "EXASOL_"
+  }
+}
