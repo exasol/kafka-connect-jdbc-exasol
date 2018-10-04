@@ -21,7 +21,7 @@
         <checkstyle.version>6.19</checkstyle.version>
         <checkstyle.config.location>checkstyle/checkstyle.xml</checkstyle.config.location>
         <checkstyle.suppressions.location>checkstyle/suppressions.xml</checkstyle.suppressions.location>
-        <kafka.version>1.1.0</kafka.version>
+        <kafka.version>2.0.0</kafka.version>
         <kafka-connect-jdbc.version>5.0.0</kafka-connect-jdbc.version>
         <kafka-connect-jdbc.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}.jar</kafka-connect-jdbc.jar>
         <kafka-connect-jdbc-test.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}-tests.jar</kafka-connect-jdbc-test.jar>
