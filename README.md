@@ -47,7 +47,7 @@ docker-compose up
   Kafka immediately starts to look for the Exasol tables.**
 
 ```bash
-docker exec -it exasol-db bash -c "exaplus -c n11:8888 -u sys -P exasol -f /test/country.sql"
+docker exec -it exasol-db exaplus -c n11:8888 -u sys -P exasol -f /test/country.sql
 ```
 
 ### Testing Connect Source (Exasol -> Kafka)
