@@ -10,12 +10,12 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - ./data/exa:/exa
-      - ./data/test:/test
+      - $PWD/data/exa:/exa
+      - $PWD/data/test:/test
 
   # Kafka Stack
   zookeeper:
-    image: confluentinc/cp-zookeeper:4.1.1
+    image: confluentinc/cp-zookeeper:5.0.0
     container_name: zookeeper
     ports:
       - 2181:2181
@@ -29,7 +29,7 @@ services:
           - zookeeper.internal
 
   kafka01.internal:
-    image: confluentinc/cp-kafka:4.1.1
+    image: confluentinc/cp-kafka:5.0.0
     container_name: kafka01
     depends_on:
       - zookeeper
@@ -41,7 +41,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka01.internal:9092
 
   kafka02.internal:
-    image: confluentinc/cp-kafka:4.1.1
+    image: confluentinc/cp-kafka:5.0.0
     container_name: kafka02
     depends_on:
       - zookeeper
@@ -53,7 +53,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka02.internal:9093
 
   kafka03.internal:
-    image: confluentinc/cp-kafka:4.1.1
+    image: confluentinc/cp-kafka:5.0.0
     container_name: kafka03
     depends_on:
       - zookeeper
@@ -65,7 +65,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka03.internal:9094
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:4.1.1
+    image: confluentinc/cp-schema-registry:5.0.0
     container_name: schema-registry
     depends_on:
       - zookeeper
@@ -79,13 +79,12 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper.internal:2181
 
   kafka-connect:
-    #image: confluentinc/cp-kafka-connect:4.1.1
-    build:
-      context: ./kafka-connect-image
-    image: custom/kafka-connect
+    image: confluentinc/cp-kafka-connect:5.0.0
     container_name: kafka-connect
     ports:
       - 8083:8083
+    volumes:
+      - $PWD/kafka-connect-exasol/jars:/etc/kafka-connect/jars
     environment:
       CONNECT_BOOTSTRAP_SERVERS: kafka01.internal:9092,kafka02.internal:9093,kafka03.internal:9094
       CONNECT_REST_ADVERTISED_PORT: 8083
@@ -106,7 +105,7 @@ services:
       CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect"
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
       #CONNECT_LOG4J_ROOT_LOGLEVEL: DEBUG
-      CONNECT_PLUGIN_PATH: "/usr/share/java/,/opt/kafka-connect/jars"
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/etc/kafka-connect/jars"
     depends_on:
       - kafka01.internal
       - schema-registry
