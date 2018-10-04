@@ -4,9 +4,7 @@ services:
 
   # Exasol DB
   exasol-db:
-    build:
-      context: ./exasol-db-image
-    image: custom/exasol-db
+    image: exasol/docker-db:latest
     container_name: exasol-db
     privileged: true
     ports:

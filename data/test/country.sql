@@ -1,4 +1,4 @@
-DROP SCHEMA country_schema CASCADE;
+DROP SCHEMA IF EXISTS country_schema CASCADE;
 
 CREATE SCHEMA country_schema;
 
