@@ -15,4 +15,4 @@ jdk:
   - openjdk8
 
 script:
-  - mvn clean test
+  - mvn clean install

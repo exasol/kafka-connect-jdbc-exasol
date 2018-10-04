@@ -1,4 +1,4 @@
-# Install Kafka Connect JDBC v5.0.0-rc1
+# Install Kafka Connect JDBC v5.0.0
 
 Exasol Kafka Connect dialect only works with Kafka Connect JDBC version
 `5.0.0+`. However, these jars are not yet in [Confluent maven
