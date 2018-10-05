@@ -2,13 +2,15 @@
 
 [![Build Status](https://travis-ci.org/EXASOL/kafka-connect-jdbc-exasol.svg?branch=master)][travis]
 
-[Exasol][exasol] database dialect for [Kafka Confluent JDBC
+###### Please note that this is an open source project which is *not officially supported* by Exasol. We will try to help you as much as possible, but can't guarantee anything since this is not an official Exasol product.
+
+## Overview
+
+[Exasol][exasol] database dialect example setup for [Kafka Confluent JDBC
 Connector][kafka-jdbc].
 
 **Please bear in mind that this only works with Kafka Connect JDBC version
 5.0+**
-
-## Table of Contents
 
 * [Production Setup](#production-setup)
 * [Testing Locally](#testing-locally)
