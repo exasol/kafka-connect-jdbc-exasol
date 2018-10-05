@@ -10,17 +10,47 @@ Connector][kafka-jdbc].
 
 ## Table of Contents
 
-* [Quick Start](#quick-start)
+* [Production Setup](#production-setup)
+* [Testing Locally](#testing-locally)
 * [Dependencies and Services](#dependencies-and-services)
 * [Gotchas](#gotchas)
 
-## Quick Start
+## Production setup
+
+If you already have an running Confluent Kafka Connect cluster, you need setup
+Exasol source or sink configuration (or both). You can find example
+configurations for [exasol-source](./exasol-source.json) and
+[exasol-sink](./exasol-sink.json). Please upload these to Kafka Connect
+connectors, for example,
+
+```bash
+curl -X POST \
+     -H "Content-Type: application/json" \
+     --data @exasol-source.json kafka.connect.host:8083/connectors
+```
+
+Additionally, you need to upload the Exasol JDBC
+[jars](./kafka-connect-exasol/jars) to the connect plugin path. The plugin paths
+are possibly `/usr/share/java` or `/etc/kafka-connect/jars`. However, please
+check that these paths are on Kafka classpath.
+
+You can find more information on Confluent documentation pages. Some relevant
+documentations are listed below.
+
+* [Kafka Connectors](https://docs.confluent.io/current/connect/managing/index.html)
+* [Kafka Connect JDBC Connector](https://docs.confluent.io/5.0.0/connect/kafka-connect-jdbc/index.html)
+* [Configuring Connectors](https://docs.confluent.io/5.0.0/connect/managing/configuring.html)
+* [Manually Installing Community Connectors](https://docs.confluent.io/5.0.0/connect/managing/community.html)
+
+## Testing locally
 
 For testing we are going to use [docker][docker] and
 [docker-compose][docker-compose]. Please set them up accordingly on your local
-machine. **Additionally, if you are using non Linux machine, please obtain the
-ip address for docker or docker-machine**. For example, in MacOS, with the
-following command:
+machine. For running [Exasol docker-db][dh-exadb] you need root privileges.
+
+**Additionally, if you are using non Linux machine, please obtain the ip address
+for docker or docker-machine**. For example, in MacOS, with the following
+command:
 
 ```bash
 docker-machine ip
@@ -34,7 +64,7 @@ We need to open several terminals for dockerized testing.
 * First clone this repository and start all the services:
 
 ```bash
-git clone https://github.com/exazg/kafka-connect-jdbc-exasol.git
+git clone https://github.com/EXASOL/kafka-connect-jdbc-exasol.git
 
 cd kafka-connect-jdbc-exasol
 
@@ -150,18 +180,6 @@ For this example setup we depend on several jar files:
     `kafka-connect-image/jars/`.
 * [Kafka Connect JDBC Connector][kafka-jdbc] (5.0+ version)
   * You can find installation guide here at [docs/install-kafka](docs/install-kafka.md).
-
-The artifacts are put into correct folders so that Kafka Connect can find
-them:
-
-```dockerfile
-RUN cp /jars/exasol-jdbc-6.0.8.jar /usr/share/java/kafka-connect-jdbc/
-RUN cp /jars/kafka-connect-jdbc-exasol-0.0.1.jar /usr/share/java/kafka-connect-jdbc/
-RUN cp /jars/kafka-connect-jdbc-5.0.0.jar /usr/share/java/kafka-connect-jdbc/
-
-## Remove connector coming with docker image version 4.1.1
-RUN rm /usr/share/java/kafka-connect-jdbc/kafka-connect-jdbc-4.1.1.jar
-```
 
 Additionally, we are using docker-compose based Exasol and Kafka Connect
 services. The Kafka Connect is configured for [distributed
