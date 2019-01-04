@@ -70,7 +70,13 @@ git clone https://github.com/EXASOL/kafka-connect-jdbc-exasol.git
 
 cd kafka-connect-jdbc-exasol
 
+# If you're running docker in a virtual environment you might 
+# need to run the following command before docker-compose up:
+
+# export COMPOSE_TLS_VERSION=TLSv1_2
+
 docker-compose up
+
 ```
 
 * Now we should create an exasol sample schema and table. This example creates a
