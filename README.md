@@ -221,6 +221,17 @@ connector.
 * The `incrementing` or `timestamp` column names in Kafka Connect configuration,
   should have a `NOT NULL` constraint when creating a table definition.
 
+## Troubleshooting
+
+### Batch upserts
+
+The batch mode together with upsert is not supported at the moment. We transform
+the Kafka upserts into Exasol specific `MERGE` statements that does not support
+batches.
+
+You can read more about it at
+[issue #5](https://github.com/exasol/kafka-connect-jdbc-exasol/issues/5).
+
 [exasol]: https://www.exasol.com/en/
 [kafka-jdbc]: https://github.com/confluentinc/kafka-connect-jdbc
 [kafka-connect]: http://kafka.apache.org/documentation.html#connect
