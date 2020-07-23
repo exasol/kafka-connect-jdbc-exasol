@@ -1,19 +1,31 @@
 language: java
 dist: trusty
 
-cache:
-  directories:
-    - $HOME/.m2
-
-# The latest java8
 addons:
   apt:
     packages:
       - oracle-java8-installer
+
+  sonarcloud:
+    organization: "exasol"
+    token:
+      secure: |-
+        e1ALRFBKVw8rIYUpcxAVtd7KYjVlf4tNyzgQtcdfbWT+vyHyItWkXczIKTIqE56wDL9daOhSZs78QVHeT3VJhKRsh
+        SWO/tVyz+wiJFurzT6TRkGhniRdNYGHrR8IprIUuKkR8A1qvNiReIXMHDfFJLmtyJAPShQQ/b1Wv6unMeHCWg5L/i
+        QMvf7k5kGKM+gHTbNPQKJVkCokScm3iBsQGiYFs13r/OAFGaaXQL9wXj4/GbtvXTTK8GKWN47BzxIRaUyCExi1C0n
+        SKNxdoVkliO1lD+FUYKtNouhKsPkg/A0En3OHnkTfJc1aRAdqVuV6bheex7wAqiI/wNPPnMiqwPz58jsb576DXufk
+        CliC6wazYehbd92/i8zgqt+BPlIUB9nUsAFZnyTn7ksSYWAAReXMFA+R3G2OxIeBv3FuNRePkhcsJ7sy0NFH1SFOc
+        z9x0jR7VNjGosTm/8UWV0kWTQR55vBqx7Ph6TrxGSpv3rzEEEvK0tIpInSIMA/eG9XRxQvVTheE1A/K99VNWfn92+
+        91lxFK0brIcVXkXj8LdAp6fhW2uYh+blaRJ8YLyvvNs7tjgbZOAd75jjNr1Vkz3piUeE1YeDK7UtmHTQIo5nmS4yZ
+        dw/IjB9UnlBgikbgZnL+eYH0kuhfMu5bOwXp52WZFiKncvrrGz3RpXJf12vM=
 
 jdk:
   - oraclejdk8
   - openjdk8
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify sonar:sonar
+
+cache:
+  directories:
+    - "$HOME/.m2"
