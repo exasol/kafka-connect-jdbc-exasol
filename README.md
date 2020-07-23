@@ -1,6 +1,6 @@
 # kafka-connect-jdbc-exasol
 
-[![Build Status](https://travis-ci.org/exasol/kafka-connect-jdbc-exasol.svg?branch=master)][travis]
+[![Build Status](https://travis-ci.com/exasol/kafka-connect-jdbc-exasol.svg?branch=master)][travis]
 
 <p style="border: 1px solid black;padding: 10px; background-color: #FFFFCC;">
 <span style="font-size:200%">&#128712;</span> Please note that this is an open

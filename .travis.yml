@@ -16,4 +16,4 @@ jdk:
   - openjdk8
 
 script:
-  - mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify
