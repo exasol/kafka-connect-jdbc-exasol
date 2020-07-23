@@ -243,4 +243,4 @@ You can read more about it at
 [dh-cpkf]: https://hub.docker.com/r/confluentinc/cp-kafka/
 [dh-cpsr]: https://hub.docker.com/r/confluentinc/cp-schema-registry/
 [exa-jdbc-driver]: https://maven.exasol.com/artifactory/webapp/#/artifacts/browse/tree/General/exasol-releases/com/exasol/exasol-jdbc/6.0.8/exasol-jdbc-6.0.8.jar
-[travis]: https://travis-ci.org/EXASOL/kafka-connect-jdbc-exasol
+[travis]: https://travis-ci.com/exasol/kafka-connect-jdbc-exasol
