@@ -1,17 +1,9 @@
-language: java
-dist: trusty
+sudo: false
+install: true
 
 addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-
   sonarcloud:
     organization: exasol
-
-jdk:
-  - oraclejdk8
-  - openjdk8
 
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent org.jacoco:jacoco-maven-plugin:prepare-agent-integration verify sonar:sonar -Dsonar.login=${SONAR_TOKEN}
@@ -19,3 +11,4 @@ script:
 cache:
   directories:
     - "$HOME/.m2"
+    - '$HOME/.sonar/cache'
