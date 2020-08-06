@@ -99,6 +99,7 @@ public class ExasolDatabaseDialectTest extends BaseDialectTest<ExasolDatabaseDia
                       "\"c6\" DECIMAL(10,0) DEFAULT '00:00:00.000',\n" +
                       "\"c7\" TIMESTAMP DEFAULT '2001-03-15 00:00:00.000',\n" +
                       "\"c8\" DECIMAL(36,4) NULL,\n" +
+                      "\"c9\" BOOLEAN DEFAULT 1,\n" +
                       "PRIMARY KEY(\"c1\"))";
     String sql = dialect.buildCreateTableStatement(tableId, sinkRecordFields);
     assertEquals(expected, sql);
@@ -114,7 +115,8 @@ public class ExasolDatabaseDialectTest extends BaseDialectTest<ExasolDatabaseDia
                     "ALTER TABLE \"myTable\" ADD \"c5\" DATE DEFAULT '2001-03-15'",
                     "ALTER TABLE \"myTable\" ADD \"c6\" DECIMAL(10,0) DEFAULT '00:00:00.000'",
                     "ALTER TABLE \"myTable\" ADD \"c7\" TIMESTAMP DEFAULT '2001-03-15 00:00:00.000'",
-                    "ALTER TABLE \"myTable\" ADD \"c8\" DECIMAL(36,4) NULL"};
+                    "ALTER TABLE \"myTable\" ADD \"c8\" DECIMAL(36,4) NULL",
+                    "ALTER TABLE \"myTable\" ADD \"c9\" BOOLEAN DEFAULT 1"};
     assertStatements(sql, statements);
   }
 
