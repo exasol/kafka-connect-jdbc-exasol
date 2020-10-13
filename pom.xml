@@ -25,7 +25,7 @@
         <kafka-connect-jdbc.version>5.0.0</kafka-connect-jdbc.version>
         <kafka-connect-jdbc.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}.jar</kafka-connect-jdbc.jar>
         <kafka-connect-jdbc-test.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}-tests.jar</kafka-connect-jdbc-test.jar>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito-all.version>1.10.19</mockito-all.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <confluent.maven.repo>http://packages.confluent.io/maven/</confluent.maven.repo>
