@@ -1,6 +1,18 @@
 # kafka-connect-jdbc-exasol
 
-[![Build Status](https://travis-ci.org/exasol/kafka-connect-jdbc-exasol.svg?branch=master)][travis]
+[![Build Status][travis-badge]][travis-link]
+
+SonarCloud results:
+
+[![Quality Gate Status][sonar-qgate-badge]][sonar-qgate-link]
+[![Security Rating][sonar-security-badge]][sonar-security-link]
+[![Maintainability Rating][sonar-maintain-badge]][sonar-maintain-link]
+
+[![Technical Debt][sonar-techdebt-badge]][sonar-techdebt-link]
+[![Code Smells][sonar-codesmells-badge]][sonar-codesmells-link]
+[![Coverage][sonar-coverage-badge]][sonar-coverage-link]
+[![Duplicated Lines (%)][sonar-duplicates-badge]][sonar-duplicates-link]
+[![Lines of Code][sonar-lines-badge]][sonar-lines-link]
 
 <p style="border: 1px solid black;padding: 10px; background-color: #FFFFCC;">
 <span style="font-size:200%">&#128712;</span> Please note that this is an open
@@ -243,4 +255,23 @@ You can read more about it at
 [dh-cpkf]: https://hub.docker.com/r/confluentinc/cp-kafka/
 [dh-cpsr]: https://hub.docker.com/r/confluentinc/cp-schema-registry/
 [exa-jdbc-driver]: https://maven.exasol.com/artifactory/webapp/#/artifacts/browse/tree/General/exasol-releases/com/exasol/exasol-jdbc/6.0.8/exasol-jdbc-6.0.8.jar
-[travis]: https://travis-ci.org/EXASOL/kafka-connect-jdbc-exasol
+[travis-link]: https://travis-ci.com/exasol/kafka-connect-jdbc-exasol
+[travis-badge]: https://img.shields.io/travis/exasol/kafka-connect-jdbc-exasol/master.svg?logo=travis
+[sonar-qgate-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=alert_status
+[sonar-qgate-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-security-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=security_rating
+[sonar-security-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-reliability-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=reliability_rating
+[sonar-reliability-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-maintain-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_rating
+[sonar-maintain-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-techdebt-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_index
+[sonar-techdebt-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-codesmells-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=code_smells
+[sonar-codesmells-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-coverage-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=coverage
+[sonar-coverage-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-duplicates-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=duplicated_lines_density
+[sonar-duplicates-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
+[sonar-lines-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=ncloc
+[sonar-lines-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol

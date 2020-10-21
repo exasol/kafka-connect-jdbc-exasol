@@ -15,26 +15,31 @@
     <version>0.1.0</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>8</java.version>
-        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-        <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
-        <checkstyle.version>8.29</checkstyle.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+        <checkstyle.version>8.34</checkstyle.version>
         <checkstyle.config.location>checkstyle/checkstyle.xml</checkstyle.config.location>
         <checkstyle.suppressions.location>checkstyle/suppressions.xml</checkstyle.suppressions.location>
-        <kafka.version>2.0.0</kafka.version>
-        <kafka-connect-jdbc.version>5.0.0</kafka-connect-jdbc.version>
-        <kafka-connect-jdbc.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}.jar</kafka-connect-jdbc.jar>
-        <kafka-connect-jdbc-test.jar>${basedir}/lib/kafka-connect-jdbc-${kafka-connect-jdbc.version}-tests.jar</kafka-connect-jdbc-test.jar>
-        <junit.version>4.13.1</junit.version>
-        <mockito-all.version>1.10.19</mockito-all.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <confluent.maven.repo>http://packages.confluent.io/maven/</confluent.maven.repo>
+        <jococo-maven-plugin.version>0.8.5</jococo-maven-plugin.version>
+        <kafka.version>2.5.0</kafka.version>
+        <kafka-connect-jdbc.version>5.5.0</kafka-connect-jdbc.version>
+        <exasol-jdbc.version>6.2.5</exasol-jdbc.version>
+        <exasol.maven.repo>https://maven.exasol.com/artifactory/exasol-releases/</exasol.maven.repo>
+        <confluent.maven.repo>https://packages.confluent.io/maven/</confluent.maven.repo>
     </properties>
 
     <repositories>
         <repository>
+            <id>exasol</id>
+            <name>Exasol Releases</name>
+            <url>${exasol.maven.repo}</url>
+        </repository>
+        <repository>
             <id>confluent</id>
-            <name>Confluent</name>
+            <name>Confluent Releases</name>
             <url>${confluent.maven.repo}</url>
         </repository>
     </repositories>
@@ -48,33 +53,39 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.kafka</groupId>
+            <groupId>io.confluent</groupId>
             <artifactId>kafka-connect-jdbc</artifactId>
             <version>${kafka-connect-jdbc.version}</version>
-            <scope>system</scope>
-            <systemPath>${kafka-connect-jdbc.jar}</systemPath>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.kafka</groupId>
+            <groupId>com.exasol</groupId>
+            <artifactId>exasol-jdbc</artifactId>
+            <version>${exasol-jdbc.version}</version>
+        </dependency>
+
+        <!-- Test Dependencies -->
+
+        <dependency>
+            <groupId>io.confluent</groupId>
             <artifactId>kafka-connect-jdbc</artifactId>
             <version>${kafka-connect-jdbc.version}</version>
             <type>test-jar</type>
-            <scope>system</scope>
-            <systemPath>${kafka-connect-jdbc-test.jar}</systemPath>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>${mockito-all.version}</version>
+            <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -125,6 +136,106 @@
                         <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jococo-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>prepare-agent-integration</id>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-integration</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-integration</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly/all-dependencies.xml</descriptor>
+                    </descriptors>
+                    <finalName>kafka-connect-jdbc-exasol-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.ossindex.maven</groupId>
+                <artifactId>ossindex-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>audit</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>display-plugin-updates</goal>
+                            <goal>display-dependency-updates</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.3.9</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
