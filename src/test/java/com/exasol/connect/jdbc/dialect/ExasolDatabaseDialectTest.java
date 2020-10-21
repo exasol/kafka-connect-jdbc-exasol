@@ -9,7 +9,6 @@ import org.apache.kafka.connect.data.Timestamp;
 import org.apache.kafka.connect.errors.ConnectException;
 
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
@@ -27,9 +26,6 @@ public class ExasolDatabaseDialectTest extends BaseDialectTest<ExasolDatabaseDia
     return new ExasolDatabaseDialect(sourceConfigWithUrl("jdbc:exa://something"));
   }
 
-  @Rule
-  public final ExpectedException exception = ExpectedException.none();
-
   @Test
   public void shouldMapPrimitiveSchemaTypeToSqlTypes() {
     assertPrimitiveMapping(Type.INT8, "DECIMAL(3,0)");
@@ -40,10 +36,14 @@ public class ExasolDatabaseDialectTest extends BaseDialectTest<ExasolDatabaseDia
     assertPrimitiveMapping(Type.FLOAT64, "DOUBLE");
     assertPrimitiveMapping(Type.BOOLEAN, "BOOLEAN");
     assertPrimitiveMapping(Type.STRING, "CLOB");
+  }
+
+  @Test(expected = ConnectException.class)
+  public void testUnsupportedSchemaTypeToSqlTypes() {
     // BLOB is not supported
-    exception.expect(ConnectException.class);
     assertPrimitiveMapping(Type.BYTES, "BLOB");
   }
+
 
   @Test
   public void shouldMapDecimalSchemaTypeToDecimalSqlType() {
@@ -68,8 +68,11 @@ public class ExasolDatabaseDialectTest extends BaseDialectTest<ExasolDatabaseDia
     verifyDataTypeMapping("DATE", Date.SCHEMA);
     verifyDataTypeMapping("DECIMAL(10,0)", Time.SCHEMA);
     verifyDataTypeMapping("TIMESTAMP", Timestamp.SCHEMA);
+  }
+
+  @Test(expected = ConnectException.class)
+  public void testUnsupportedMapDataTypes() {
     // BLOB is not supported
-    exception.expect(ConnectException.class);
     verifyDataTypeMapping("BLOB", Schema.BYTES_SCHEMA);
   }
 
