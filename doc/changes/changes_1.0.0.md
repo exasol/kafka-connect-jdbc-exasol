@@ -13,6 +13,7 @@
 ## Dependency Updates
 
 * Removed `org.apache.maven.plugins:maven-checkstyle-plugin`
+* Added `com.exasol:project-keeper-maven-plugin:0.5.0`
 * Added `com.exasol:error-code-crawler-maven-plugin:0.1.1`
 * Updated `com.exasol:exasol-jdbc:6.2.5` to `7.0.7`
 * Updated `io.confluent:kafka-connect-jdbc:5.5.0` to `10.0.2`
