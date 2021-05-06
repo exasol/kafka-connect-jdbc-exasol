@@ -7,7 +7,6 @@
     "mode": "timestamp+incrementing",
     "timestamp.column.name": "UPDATED_AT",
     "incrementing.column.name": "ID",
-    "topic.prefix": "EXASOL_",
-    "table.whitelist": "COUNTRY"
+    "topic.prefix": "EXASOL_"
   }
 }
