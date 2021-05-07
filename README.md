@@ -156,7 +156,7 @@ kafka-avro-console-consumer \
 
 ### Testing Connect Sink (Kafka -> Exasol)
 
-* Now we should create an exasol sample schema and table. This example creates a
+* Now we should create an Exasol sample schema and table. This example creates a
   `country_population` table inside `country_schema` and will be the destination for the kafka topic records.
   **This step should happen before Kafka connector configurations setup otherwise it will not find the sink table in Exasol**
 
