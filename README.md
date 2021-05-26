@@ -101,7 +101,7 @@ docker-compose up
   Kafka immediately starts to look for the Exasol tables.**
 
 ```bash
-docker exec -it exasol-db exaplus -c n11:8888 -u sys -P exasol -f /test/country.sql
+docker exec -it exasol-db exaplus -c localhost:8563 -u sys -P exasol -f /test/country.sql
 ```
 
 ### Testing Connect Source (Exasol -> Kafka)
@@ -156,6 +156,14 @@ kafka-avro-console-consumer \
 
 ### Testing Connect Sink (Kafka -> Exasol)
 
+* Now we should create an Exasol sample schema and table. This example creates a
+  `country_population` table inside `country_schema` and will be the destination for the kafka topic records.
+  **This step should happen before Kafka connector configurations setup otherwise it will not find the sink table in Exasol**
+
+```bash
+docker exec -it exasol-db exaplus -c localhost:8563 -u sys -P exasol -f /test/country_population.sql
+```
+
 * In first terminal, upload Kafka Connect Exasol Sink configurations:
 
 ```bash
@@ -177,20 +185,20 @@ docker exec -it schema-registry /bin/bash
 kafka-avro-console-producer \
     --broker-list kafka01.internal:9092 \
     --topic COUNTRY_POPULATION \
-    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"country_name","type":"string"},{"name":"population", "type": "long"}]}'
+    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"COUNTRY_NAME","type":"string"},{"name":"POPULATION", "type": "long"}]}'
 ```
 
 * Type some records in JSON format:
 
-```bash
-{"country_name": "France", "population": 67}
-{"country_name": "Croatia", "population": 4}
+{"COUNTRY_NAME": "France", "POPULATION": 67}
+{"COUNTRY_NAME": "Croatia", "POPULATION": 4}```bash
+
 ```
 
 * In another terminal, ensure that the records are available in Exasol table:
 
 ```bash
-docker exec -it exasol-db bash -c 'exaplus -c n11:8888 -u sys -P exasol -sql "SELECT * FROM country_schema.country_population;"'
+docker exec -it exasol-db bash -c 'exaplus -c localhost:8563 -u sys -P exasol -sql "SELECT * FROM country_schema.country_population;"'
 ```
 
 ## Dependencies and Services

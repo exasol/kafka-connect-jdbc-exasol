@@ -3,11 +3,12 @@
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
-    "connection.url": "jdbc:exa:exasol-db:8888;schema=country_schema",
+    "connection.url": "jdbc:exa:exasol-db:8563;schema=COUNTRY_SCHEMA",
     "connection.user": "sys",
     "connection.password": "exasol",
     "insert.mode": "insert",
-    "auto.create": true,
-    "topics": "COUNTRY_POPULATION"
+    "auto.create": false,
+    "topics": "COUNTRY_POPULATION",
+    "table.name.format": "COUNTRY_POPULATION"
   }
 }

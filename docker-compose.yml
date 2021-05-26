@@ -8,9 +8,8 @@ services:
     container_name: exasol-db
     privileged: true
     ports:
-      - 8888:8888
+      - 9563:8563
     volumes:
-      - $PWD/data/exa:/exa
       - $PWD/data/test:/test
 
   # Kafka Stack
