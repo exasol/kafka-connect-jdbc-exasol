@@ -1,6 +1,6 @@
 # kafka-connect-jdbc-exasol
 
-[![Build Status][travis-badge]][travis-link]
+[![Build Status](https://travis-ci.com/exasol/kafka-connect-jdbc-exasol.svg?branch=main)](https://travis-ci.com/exasol/kafka-connect-jdbc-exasol)
 
 SonarCloud results:
 
@@ -263,8 +263,6 @@ You can read more about it at
 [dh-cpkf]: https://hub.docker.com/r/confluentinc/cp-kafka/
 [dh-cpsr]: https://hub.docker.com/r/confluentinc/cp-schema-registry/
 [exa-jdbc-driver]: https://maven.exasol.com/artifactory/webapp/#/artifacts/browse/tree/General/exasol-releases/com/exasol/exasol-jdbc/6.0.8/exasol-jdbc-6.0.8.jar
-[travis-link]: https://travis-ci.com/exasol/kafka-connect-jdbc-exasol
-[travis-badge]: https://img.shields.io/travis/exasol/kafka-connect-jdbc-exasol/master.svg?logo=travis
 [sonar-qgate-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=alert_status
 [sonar-qgate-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
 [sonar-security-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=security_rating
