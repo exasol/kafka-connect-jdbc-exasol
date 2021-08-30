@@ -137,6 +137,14 @@
                         <module>integration_tests</module>
                         <module>udf_coverage</module>
                     </modules>
+                    <linkReplacements>
+                        <linkReplacement>
+                            LICENSE-exasol-jdbc.txt|https://docs.exasol.com/connect_exasol/drivers/jdbc.htm
+                        </linkReplacement>
+                        <linkReplacement>
+                            http://www.mockito.org|https://site.mockito.org
+                        </linkReplacement>
+                    </linkReplacements>
                 </configuration>
             </plugin>
 

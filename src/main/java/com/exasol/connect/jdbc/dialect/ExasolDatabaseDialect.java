@@ -1,9 +1,7 @@
 package com.exasol.connect.jdbc.dialect;
 
-import java.io.StringReader;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +11,6 @@ import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.connect.data.Date;
 import org.apache.kafka.connect.data.Decimal;
 import org.apache.kafka.connect.data.Schema;
-import org.apache.kafka.connect.data.Schema.Type;
 import org.apache.kafka.connect.data.Timestamp;
 import org.apache.kafka.connect.errors.ConnectException;
 
@@ -94,22 +91,12 @@ public class ExasolDatabaseDialect extends GenericDatabaseDialect {
         } else {
             boolean bound = maybeBindLogical(statement, index, schema, value);
             if (!bound) {
-                bound = maybeBindPrimitive(statement, index, schema, value, colDef);
+                bound = maybeBindPrimitive(statement, index, schema, value);
             }
             if (!bound) {
                 throw new ConnectException("Unsupported source data type: " + schema.type());
             }
         }
-    }
-
-    protected boolean maybeBindPrimitive(
-        PreparedStatement statement,
-        int index,
-        Schema schema,
-        Object value,
-        ColumnDefinition colDef
-    ) throws SQLException {
-        return super.maybeBindPrimitive(statement, index, schema, value);
     }
 
     @Override

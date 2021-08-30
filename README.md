@@ -211,7 +211,7 @@ For this example setup we depend on several jar files:
     will create jar file in `target/`. Then copy it into
     `kafka-connect-image/jars/`.
 * [Kafka Connect JDBC Connector][kafka-jdbc] (5.0+ version)
-  * You can find installation guide here at [docs/install-kafka](docs/install-kafka.md).
+  * You can find installation guide here at [doc/install-kafka](doc/install-kafka.md).
 
 Additionally, we are using docker-compose based Exasol and Kafka Connect
 services. The Kafka Connect is configured for [distributed
@@ -223,7 +223,6 @@ mode][kafka-dist-mode].
 | `zookeeper` | [dockerhub/confluentinc/cp-zookeeper:4.1.1][dh-cpzk] | A single node zookeeper instance. |
 | `kafka` | [dockerhub/confluentinc/cp-kafka:4.1.1][dh-cpkf] | A kafka instance. We have three kafka node setup. |
 | `schema-registry` | [dockerhub/confluentinc/cp-schema-registry:4.1.1][dh-cpsr] | A schema-registry instance. |
-| `kafka-connect` | [kafka-connect-image/Dockerfile](kafka-connect-image/Dockerfile) | Custom configured kafka-connect instance. |
 
 ## Gotchas
 
