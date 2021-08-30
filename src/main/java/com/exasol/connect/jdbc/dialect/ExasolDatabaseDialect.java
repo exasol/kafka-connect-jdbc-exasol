@@ -1,24 +1,37 @@
 package com.exasol.connect.jdbc.dialect;
 
-import org.apache.kafka.common.config.AbstractConfig;
-import org.apache.kafka.connect.data.Date;
-import org.apache.kafka.connect.data.Decimal;
-import org.apache.kafka.connect.data.Timestamp;
-
+import java.io.StringReader;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.kafka.common.config.AbstractConfig;
+import org.apache.kafka.connect.data.Date;
+import org.apache.kafka.connect.data.Decimal;
+import org.apache.kafka.connect.data.Schema;
+import org.apache.kafka.connect.data.Schema.Type;
+import org.apache.kafka.connect.data.Timestamp;
+import org.apache.kafka.connect.errors.ConnectException;
+
 import io.confluent.connect.jdbc.dialect.DatabaseDialect;
 import io.confluent.connect.jdbc.dialect.DatabaseDialectProvider.SubprotocolBasedProvider;
 import io.confluent.connect.jdbc.dialect.DropOptions;
 import io.confluent.connect.jdbc.dialect.GenericDatabaseDialect;
+import io.confluent.connect.jdbc.sink.JdbcSinkConfig;
+import io.confluent.connect.jdbc.sink.PreparedStatementBinder;
+import io.confluent.connect.jdbc.sink.metadata.FieldsMetadata;
+import io.confluent.connect.jdbc.sink.metadata.SchemaPair;
 import io.confluent.connect.jdbc.sink.metadata.SinkRecordField;
+import io.confluent.connect.jdbc.util.ColumnDefinition;
 import io.confluent.connect.jdbc.util.ColumnId;
 import io.confluent.connect.jdbc.util.ExpressionBuilder;
 import io.confluent.connect.jdbc.util.IdentifierRules;
 import io.confluent.connect.jdbc.util.TableId;
+import io.confluent.connect.jdbc.util.TableDefinition;
 
 /**
  * A {@link DatabaseDialect} for Exasol.
@@ -46,6 +59,57 @@ public class ExasolDatabaseDialect extends GenericDatabaseDialect {
      */
     public ExasolDatabaseDialect(AbstractConfig config) {
         super(config, new IdentifierRules(".", "\"", "\""));
+    }
+
+    @Override
+    public StatementBinder statementBinder(
+        PreparedStatement statement,
+        JdbcSinkConfig.PrimaryKeyMode pkMode,
+        SchemaPair schemaPair,
+        FieldsMetadata fieldsMetadata,
+        TableDefinition tableDefinition,
+        JdbcSinkConfig.InsertMode insertMode
+    ) {
+        return new PreparedStatementBinder(
+            this,
+            statement,
+            pkMode,
+            schemaPair,
+            fieldsMetadata,
+            tableDefinition,
+            insertMode
+        );
+    }
+
+    @Override
+    public void bindField(
+        PreparedStatement statement,
+        int index,
+        Schema schema,
+        Object value,
+        ColumnDefinition colDef
+    ) throws SQLException {
+        if (value == null) {
+            statement.setObject(index, null);
+        } else {
+            boolean bound = maybeBindLogical(statement, index, schema, value);
+            if (!bound) {
+                bound = maybeBindPrimitive(statement, index, schema, value, colDef);
+            }
+            if (!bound) {
+                throw new ConnectException("Unsupported source data type: " + schema.type());
+            }
+        }
+    }
+
+    protected boolean maybeBindPrimitive(
+        PreparedStatement statement,
+        int index,
+        Schema schema,
+        Object value,
+        ColumnDefinition colDef
+    ) throws SQLException {
+        return super.maybeBindPrimitive(statement, index, schema, value);
     }
 
     @Override

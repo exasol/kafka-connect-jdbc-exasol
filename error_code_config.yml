@@ -1,0 +1,5 @@
+error-tags:
+  PIOJ:
+    packages:
+      - com.exasol.connect.jdbc.dialect
+    highest-index: 0
