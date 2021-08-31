@@ -49,10 +49,10 @@
 
 [11]: https://www.eclemma.org/jacoco/index.html
 [15]: https://github.com/exasol/project-keeper-maven-plugin
-[4]: LICENSE-exasol-jdbc.txt
 [22]: http://www.apache.org/licenses/LICENSE-2.0.txt
 [29]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [41]: http://maven.apache.org/plugins/maven-clean-plugin/
+[4]: https://docs.exasol.com/connect_exasol/drivers/jdbc.htm
 [16]: https://opensource.org/licenses/MIT
 [31]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 [23]: http://www.mojohaus.org/versions-maven-plugin/
@@ -64,6 +64,7 @@
 [8]: http://www.eclipse.org/legal/epl-v10.html
 [0]: https://kafka.apache.org
 [17]: https://www.jacoco.org/jacoco/trunk/doc/maven.html
+[9]: https://site.mockito.org
 [37]: http://zlika.github.io/reproducible-build-maven-plugin
 [14]: https://www.apache.org/licenses/LICENSE-2.0.txt
 [25]: https://maven.apache.org/enforcer/maven-enforcer-plugin/
@@ -72,7 +73,6 @@
 [45]: http://maven.apache.org/plugins/maven-install-plugin/
 [21]: https://sonatype.github.io/ossindex-maven/maven-plugin/
 [10]: http://github.com/mockito/mockito/blob/master/LICENSE
-[9]: http://www.mockito.org
 [47]: http://maven.apache.org/plugins/maven-deploy-plugin/
 [49]: http://maven.apache.org/plugins/maven-site-plugin/
 [43]: http://maven.apache.org/plugins/maven-resources-plugin/
