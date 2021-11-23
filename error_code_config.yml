@@ -1,0 +1,4 @@
+error-tags:
+  KCJE:
+    packages:
+      - com.exasol.connect.jdbc.dialect
