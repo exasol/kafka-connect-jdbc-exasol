@@ -1,24 +1,18 @@
 # kafka-connect-jdbc-exasol
 
-[![Build Status](https://travis-ci.com/exasol/kafka-connect-jdbc-exasol.svg?branch=main)](https://travis-ci.com/exasol/kafka-connect-jdbc-exasol)
+[![Build Status](https://github.com/exasol/kafka-connect-jdbc-exasol/actions/workflows/ci-build.yml/badge.svg)](https://github.com/exasol/kafka-connect-jdbc-exasol/actions/workflows/ci-build.yml)
 
-SonarCloud results:
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
 
-[![Quality Gate Status][sonar-qgate-badge]][sonar-qgate-link]
-[![Security Rating][sonar-security-badge]][sonar-security-link]
-[![Maintainability Rating][sonar-maintain-badge]][sonar-maintain-link]
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_index)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
 
-[![Technical Debt][sonar-techdebt-badge]][sonar-techdebt-link]
-[![Code Smells][sonar-codesmells-badge]][sonar-codesmells-link]
-[![Coverage][sonar-coverage-badge]][sonar-coverage-link]
-[![Duplicated Lines (%)][sonar-duplicates-badge]][sonar-duplicates-link]
-[![Lines of Code][sonar-lines-badge]][sonar-lines-link]
-
-<p style="border: 1px solid black;padding: 10px; background-color: #FFFFCC;">
-<span style="font-size:200%">&#128712;</span> Please note that this is an open
-source project which is officially supported by Exasol. For any question, you
-can contact our support team or open a Github issue.
-</p>
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=code_smells)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=coverage)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=ncloc)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
 
 ## Overview
 
@@ -32,6 +26,14 @@ Connector][kafka-jdbc].
 * [Testing Locally](#testing-locally)
 * [Dependencies and Services](#dependencies-and-services)
 * [Gotchas](#gotchas)
+
+## Information for Users
+
+* [Changelog](doc/changes/changelog.md)
+
+## Information for Developers
+
+* [Dependencies](dependencies.md)
 
 ## Production setup
 
@@ -86,7 +88,7 @@ git clone https://github.com/EXASOL/kafka-connect-jdbc-exasol.git
 
 cd kafka-connect-jdbc-exasol
 
-# If you're running docker in a virtual environment you might 
+# If you're running docker in a virtual environment you might
 # need to run the following command before docker-compose up:
 
 # export COMPOSE_TLS_VERSION=TLSv1_2
@@ -211,19 +213,19 @@ For this example setup we depend on several jar files:
     will create jar file in `target/`. Then copy it into
     `kafka-connect-image/jars/`.
 * [Kafka Connect JDBC Connector][kafka-jdbc] (5.0+ version)
-  * You can find installation guide here at [docs/install-kafka](docs/install-kafka.md).
+  * You can find installation guide here at [doc/install-kafka](doc/install-kafka.md).
 
 Additionally, we are using docker-compose based Exasol and Kafka Connect
 services. The Kafka Connect is configured for [distributed
 mode][kafka-dist-mode].
 
-| Service Name | Versions | Description |
-| :---         | :---     | :---        |
-| `exasol-db` | [dockerhub/exasol/docker-db:6.0.10-d1][dh-exadb] | An Exasol docker db. Please note that we use stand-alone cluster mode. |
-| `zookeeper` | [dockerhub/confluentinc/cp-zookeeper:4.1.1][dh-cpzk] | A single node zookeeper instance. |
-| `kafka` | [dockerhub/confluentinc/cp-kafka:4.1.1][dh-cpkf] | A kafka instance. We have three kafka node setup. |
-| `schema-registry` | [dockerhub/confluentinc/cp-schema-registry:4.1.1][dh-cpsr] | A schema-registry instance. |
-| `kafka-connect` | [kafka-connect-image/Dockerfile](kafka-connect-image/Dockerfile) | Custom configured kafka-connect instance. |
+| Service Name      | Versions                                             | Description                                                            |
+| :---------------- | :--------------------------------------------------- | :--------------------------------------------------------------------- |
+| `exasol-db`       | [dockerhub/exasol/docker-db][dh-exadb]               | An Exasol docker db. Please note that we use stand-alone cluster mode. |
+| `zookeeper`       | [dockerhub/confluentinc/cp-zookeeper][dh-cpzk]       | A single node zookeeper instance.                                      |
+| `kafka`           | [dockerhub/confluentinc/cp-kafka][dh-cpkf]           | A kafka instance. We have three kafka node setup.                      |
+| `schema-registry` | [dockerhub/confluentinc/cp-schema-registry][dh-cpsr] | A schema-registry instance.                                            |
+| `kafka-connect`   | [dockerhub/confluentinc/cp-kafka-connect][dh-cpkc]   | Custom configured kafka-connect instance.                              |
 
 ## Gotchas
 
@@ -262,22 +264,5 @@ You can read more about it at
 [dh-cpzk]: https://hub.docker.com/r/confluentinc/cp-zookeeper/
 [dh-cpkf]: https://hub.docker.com/r/confluentinc/cp-kafka/
 [dh-cpsr]: https://hub.docker.com/r/confluentinc/cp-schema-registry/
+[dh-cpkc]: https://hub.docker.com/r/confluentinc/cp-kafka-connect/
 [exa-jdbc-driver]: https://maven.exasol.com/artifactory/webapp/#/artifacts/browse/tree/General/exasol-releases/com/exasol/exasol-jdbc/6.0.8/exasol-jdbc-6.0.8.jar
-[sonar-qgate-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=alert_status
-[sonar-qgate-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-security-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=security_rating
-[sonar-security-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-reliability-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=reliability_rating
-[sonar-reliability-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-maintain-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_rating
-[sonar-maintain-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-techdebt-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=sqale_index
-[sonar-techdebt-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-codesmells-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=code_smells
-[sonar-codesmells-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-coverage-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=coverage
-[sonar-coverage-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-duplicates-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=duplicated_lines_density
-[sonar-duplicates-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol
-[sonar-lines-badge]: https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=ncloc
-[sonar-lines-link]: https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol

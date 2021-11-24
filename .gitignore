@@ -13,3 +13,20 @@ target
 
 data/exa/*/
 !data/exa/.gitkeep
+
+.DS_Store
+*.swp
+local
+.dbeaver*
+**/*.log
+.directory
+venv/
+.idea
+dependency-reduced-pom.xml
+pom.xml.versionsBackup
+~*
+*.lock
+*.bak
+*.orig
+*.old
+*.md.html
