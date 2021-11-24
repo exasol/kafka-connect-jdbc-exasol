@@ -1,4 +1,4 @@
-# Kafka Connect JDBC Exasol 1.0.0, released 2021-11-24
+# Kafka Connect JDBC Exasol 1.0.0, released 2021-??-??
 
 ## Code name: Moved to Github Actions and updated dependencies
 
