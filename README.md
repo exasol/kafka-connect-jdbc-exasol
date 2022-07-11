@@ -14,6 +14,10 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.exasol%3Akafka-connect-jdbc-exasol&metric=ncloc)](https://sonarcloud.io/dashboard?id=com.exasol%3Akafka-connect-jdbc-exasol)
 
+## Deprecation Warning
+
+⚠ This project is discontinued in favor of [exasol/kafka-connector-extension](https://github.com/exasol/kafka-connector-extension). This repository is archived.
+
 ## Overview
 
 [Exasol][exasol] database dialect example setup for [Kafka Confluent JDBC
